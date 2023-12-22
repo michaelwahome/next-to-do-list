@@ -1,18 +1,18 @@
-import TodoItem from "@/components/TodoItem";
+import { TodoItem } from "@/components/TodoItem";
 import prisma from "@/db";
 import Link from "next/link";
 
-function getTodos(){
+const getTodos = () => {
   return prisma.todo.findMany()
 }
 
-async function toggleTodo(id:string, complete:boolean){
+const toggleTodo = async (id:string, complete:boolean) => {
   "use server"
 
   await prisma.todo.update({where: { id }, data: { complete }})
 }
 
-export default async function Home() {
+const Home = async () => {
 
   const todos = await getTodos()
 
@@ -27,10 +27,12 @@ export default async function Home() {
         </Link>
       </header>
       <ul className="pl-4">
-        {todos.map(todo =>(
+        {todos.map((todo) =>(
           <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo}/>
         ))}
       </ul>
     </>
   )
 }
+
+export default Home;

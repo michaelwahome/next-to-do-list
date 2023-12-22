@@ -2,7 +2,7 @@ import prisma from "@/db";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-async function createTodo(data: FormData){
+const createTodo = async (data: FormData) => {
     "use server"
 
     const title = data.get("title")?.valueOf()
@@ -14,7 +14,7 @@ async function createTodo(data: FormData){
     redirect("/")
 }
 
-export default function Page() {
+const Page = () => {
     return (
         <>
             <header className="flex justify-between items-center mb-4">
@@ -41,3 +41,5 @@ export default function Page() {
         </>
     )
 }
+
+export default Page;
